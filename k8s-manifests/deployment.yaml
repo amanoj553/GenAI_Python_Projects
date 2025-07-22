@@ -32,5 +32,5 @@ spec:
   ports:
     - port: 8501
       targetPort: 8501
-      nodePort: 30034
+      nodePort: 30031
 
