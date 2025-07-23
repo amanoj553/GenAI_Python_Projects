@@ -158,6 +158,13 @@ So every user query gets **sent to Gemini-Pro**, and the **AI-generated response
      https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent
 ```
 
+### Gemini API Key configuration:
+```bash
+  - for normal container deployment gemini api key stored in below `PATH`
+      - .streamlit/
+          └── secrets.toml       # Contains GEMINI_API_KEY
+  - for minikube cluster deployment gemini API key stored directly in deployment yaml file under env section or add in secrets.yaml file       then uses as env in deployment yaml file.
+
 ### Dockerfile
 
 ```bash
