@@ -57,6 +57,25 @@ Each of these is implemented in a separate file in the Tabs/ folder and rendered
 
 ## 📦 Installation Steps
 
+### 🔧 Install Jenkins
+
+**Install Java:**
+```bash
+sudo apt update
+sudo apt install openjdk-21-jdk maven docker.io git unzip curl -y
+```
+**Install Jenkins:**
+```bash
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] https://pkg.jenkins.io/debian-stable binary/ | sudo tee /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt update
+sudo apt install jenkins -y
+
+# start Jenkins service
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+```
+
 ### 🔧 Install Docker
 
 ```bash
@@ -350,8 +369,13 @@ Now visit: http://<Public-IP>:30031 in your browser
 - Port-forward is only valid as long as the process is running.
 - For production, avoid port-forward and use Ingress or LoadBalancer service type.
 
+## Optional Enhancements
 
-  ## ✅ Replace Gemini API with ChatGPT (OpenAI) (Alternate option for Gemini AI)
+- Replace NodePort with Ingress for real-world deployments.
+- Replace Gemini API with ChatGPT (OpenAI) (Alternate option for Gemini AI)
+
+  
+## ✅ Replace Gemini API with ChatGPT (OpenAI) (Alternate option for Gemini AI)
 
 🔁 This is the best alternative because:
 
