@@ -6,7 +6,7 @@ This documentation covers manual and automated deployment of a Diabetes Predicti
 
 ## 📦 Application Overview
 
-This app is a **Machine Learning model** that predicts whether a patient is likely to have diabetes based on inputs. It exposes an API using **TensorFlow Serving** or **Flask**, depending on implementation.
+This app is a **Machine Learning model** that predicts whether a patient is likely to have diabetes based on inputs. It exposes an API using **Streamlit** for implementation.
 
 This is a Streamlit-based web application with the following core features:
 
