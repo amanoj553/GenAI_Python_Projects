@@ -1,0 +1,410 @@
+Started by user manoj
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/GenAI_DemoProject
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout Code)
+[Pipeline] git
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/GenAI_DemoProject/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/amanoj553/GenAI_Python_Projects.git # timeout=10
+Fetching upstream changes from https://github.com/amanoj553/GenAI_Python_Projects.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.34.1'
+ > git fetch --tags --force --progress -- https://github.com/amanoj553/GenAI_Python_Projects.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/Diabetes-Healthcare-Programme^{commit} # timeout=10
+Checking out Revision bc2c3b9a36652301af75e4a76e28f88687069cf2 (refs/remotes/origin/Diabetes-Healthcare-Programme)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f bc2c3b9a36652301af75e4a76e28f88687069cf2 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D Diabetes-Healthcare-Programme # timeout=10
+ > git checkout -b Diabetes-Healthcare-Programme bc2c3b9a36652301af75e4a76e28f88687069cf2 # timeout=10
+Commit message: "Update deployment.yaml"
+ > git rev-list --no-walk bc2c3b9a36652301af75e4a76e28f88687069cf2 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+[Pipeline] sh
++ docker build -t amanoj3452/genai-projects:diabetes-app .
+DEPRECATED: The legacy builder is deprecated and will be removed in a future release.
+            Install the buildx component to build images with BuildKit:
+            https://docs.docker.com/go/buildx/
+
+Sending build context to Docker daemon   8.48MB
+Step 1/6 : FROM python:3.12-slim
+ ---> bc31e3bfcc82
+Step 2/6 : WORKDIR /app
+ ---> Using cache
+ ---> b366b1c0f257
+Step 3/6 : COPY . .
+ ---> b14a2e18ab00
+Step 4/6 : RUN pip install --upgrade pip && pip install -r requirements.txt
+ ---> Running in 1112f597eba9
+Requirement already satisfied: pip in /usr/local/lib/python3.12/site-packages (25.0.1)
+Collecting pip
+  Downloading pip-25.1.1-py3-none-any.whl.metadata (3.6 kB)
+Downloading pip-25.1.1-py3-none-any.whl (1.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 73.8 MB/s eta 0:00:00
+Installing collected packages: pip
+  Attempting uninstall: pip
+    Found existing installation: pip 25.0.1
+    Uninstalling pip-25.0.1:
+      Successfully uninstalled pip-25.0.1
+Successfully installed pip-25.1.1
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+[0mCollecting streamlit (from -r requirements.txt (line 1))
+  Downloading streamlit-1.47.0-py3-none-any.whl.metadata (9.0 kB)
+Collecting numpy (from -r requirements.txt (line 2))
+  Downloading numpy-2.3.1-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (62 kB)
+Collecting pandas (from -r requirements.txt (line 3))
+  Downloading pandas-2.3.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (91 kB)
+Collecting matplotlib (from -r requirements.txt (line 4))
+  Downloading matplotlib-3.10.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (11 kB)
+Collecting seaborn (from -r requirements.txt (line 5))
+  Downloading seaborn-0.13.2-py3-none-any.whl.metadata (5.4 kB)
+Collecting scikit-learn (from -r requirements.txt (line 6))
+  Downloading scikit_learn-1.7.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (11 kB)
+Collecting fpdf (from -r requirements.txt (line 7))
+  Downloading fpdf-1.7.2.tar.gz (39 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting google-generativeai (from -r requirements.txt (line 8))
+  Downloading google_generativeai-0.8.5-py3-none-any.whl.metadata (3.9 kB)
+Collecting python-dotenv (from -r requirements.txt (line 9))
+  Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+Collecting altair<6,>=4.0 (from streamlit->-r requirements.txt (line 1))
+  Downloading altair-5.5.0-py3-none-any.whl.metadata (11 kB)
+Collecting blinker<2,>=1.5.0 (from streamlit->-r requirements.txt (line 1))
+  Downloading blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)
+Collecting cachetools<7,>=4.0 (from streamlit->-r requirements.txt (line 1))
+  Downloading cachetools-6.1.0-py3-none-any.whl.metadata (5.4 kB)
+Collecting click<9,>=7.0 (from streamlit->-r requirements.txt (line 1))
+  Downloading click-8.2.1-py3-none-any.whl.metadata (2.5 kB)
+Collecting packaging<26,>=20 (from streamlit->-r requirements.txt (line 1))
+  Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting pillow<12,>=7.1.0 (from streamlit->-r requirements.txt (line 1))
+  Downloading pillow-11.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.0 kB)
+Collecting protobuf<7,>=3.20 (from streamlit->-r requirements.txt (line 1))
+  Downloading protobuf-6.31.1-cp39-abi3-manylinux2014_x86_64.whl.metadata (593 bytes)
+Collecting pyarrow>=7.0 (from streamlit->-r requirements.txt (line 1))
+  Downloading pyarrow-21.0.0-cp312-cp312-manylinux_2_28_x86_64.whl.metadata (3.3 kB)
+Collecting requests<3,>=2.27 (from streamlit->-r requirements.txt (line 1))
+  Downloading requests-2.32.4-py3-none-any.whl.metadata (4.9 kB)
+Collecting tenacity<10,>=8.1.0 (from streamlit->-r requirements.txt (line 1))
+  Downloading tenacity-9.1.2-py3-none-any.whl.metadata (1.2 kB)
+Collecting toml<2,>=0.10.1 (from streamlit->-r requirements.txt (line 1))
+  Downloading toml-0.10.2-py2.py3-none-any.whl.metadata (7.1 kB)
+Collecting typing-extensions<5,>=4.4.0 (from streamlit->-r requirements.txt (line 1))
+  Downloading typing_extensions-4.14.1-py3-none-any.whl.metadata (3.0 kB)
+Collecting watchdog<7,>=2.1.5 (from streamlit->-r requirements.txt (line 1))
+  Downloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl.metadata (44 kB)
+Collecting gitpython!=3.1.19,<4,>=3.0.7 (from streamlit->-r requirements.txt (line 1))
+  Downloading GitPython-3.1.44-py3-none-any.whl.metadata (13 kB)
+Collecting pydeck<1,>=0.8.0b4 (from streamlit->-r requirements.txt (line 1))
+  Downloading pydeck-0.9.1-py2.py3-none-any.whl.metadata (4.1 kB)
+Collecting tornado!=6.5.0,<7,>=6.0.3 (from streamlit->-r requirements.txt (line 1))
+  Downloading tornado-6.5.1-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.8 kB)
+Collecting python-dateutil>=2.8.2 (from pandas->-r requirements.txt (line 3))
+  Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+Collecting pytz>=2020.1 (from pandas->-r requirements.txt (line 3))
+  Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+Collecting tzdata>=2022.7 (from pandas->-r requirements.txt (line 3))
+  Downloading tzdata-2025.2-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting jinja2 (from altair<6,>=4.0->streamlit->-r requirements.txt (line 1))
+  Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+Collecting jsonschema>=3.0 (from altair<6,>=4.0->streamlit->-r requirements.txt (line 1))
+  Downloading jsonschema-4.25.0-py3-none-any.whl.metadata (7.7 kB)
+Collecting narwhals>=1.14.2 (from altair<6,>=4.0->streamlit->-r requirements.txt (line 1))
+  Downloading narwhals-1.48.0-py3-none-any.whl.metadata (11 kB)
+Collecting gitdb<5,>=4.0.1 (from gitpython!=3.1.19,<4,>=3.0.7->streamlit->-r requirements.txt (line 1))
+  Downloading gitdb-4.0.12-py3-none-any.whl.metadata (1.2 kB)
+Collecting smmap<6,>=3.0.1 (from gitdb<5,>=4.0.1->gitpython!=3.1.19,<4,>=3.0.7->streamlit->-r requirements.txt (line 1))
+  Downloading smmap-5.0.2-py3-none-any.whl.metadata (4.3 kB)
+Collecting charset_normalizer<4,>=2 (from requests<3,>=2.27->streamlit->-r requirements.txt (line 1))
+  Downloading charset_normalizer-3.4.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (35 kB)
+Collecting idna<4,>=2.5 (from requests<3,>=2.27->streamlit->-r requirements.txt (line 1))
+  Downloading idna-3.10-py3-none-any.whl.metadata (10 kB)
+Collecting urllib3<3,>=1.21.1 (from requests<3,>=2.27->streamlit->-r requirements.txt (line 1))
+  Downloading urllib3-2.5.0-py3-none-any.whl.metadata (6.5 kB)
+Collecting certifi>=2017.4.17 (from requests<3,>=2.27->streamlit->-r requirements.txt (line 1))
+  Downloading certifi-2025.7.14-py3-none-any.whl.metadata (2.4 kB)
+Collecting contourpy>=1.0.1 (from matplotlib->-r requirements.txt (line 4))
+  Downloading contourpy-1.3.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.5 kB)
+Collecting cycler>=0.10 (from matplotlib->-r requirements.txt (line 4))
+  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.22.0 (from matplotlib->-r requirements.txt (line 4))
+  Downloading fonttools-4.59.0-cp312-cp312-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl.metadata (107 kB)
+Collecting kiwisolver>=1.3.1 (from matplotlib->-r requirements.txt (line 4))
+  Downloading kiwisolver-1.4.8-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.2 kB)
+Collecting pyparsing>=2.3.1 (from matplotlib->-r requirements.txt (line 4))
+  Downloading pyparsing-3.2.3-py3-none-any.whl.metadata (5.0 kB)
+Collecting scipy>=1.8.0 (from scikit-learn->-r requirements.txt (line 6))
+  Downloading scipy-1.16.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (61 kB)
+Collecting joblib>=1.2.0 (from scikit-learn->-r requirements.txt (line 6))
+  Downloading joblib-1.5.1-py3-none-any.whl.metadata (5.6 kB)
+Collecting threadpoolctl>=3.1.0 (from scikit-learn->-r requirements.txt (line 6))
+  Downloading threadpoolctl-3.6.0-py3-none-any.whl.metadata (13 kB)
+Collecting google-ai-generativelanguage==0.6.15 (from google-generativeai->-r requirements.txt (line 8))
+  Downloading google_ai_generativelanguage-0.6.15-py3-none-any.whl.metadata (5.7 kB)
+Collecting google-api-core (from google-generativeai->-r requirements.txt (line 8))
+  Downloading google_api_core-2.25.1-py3-none-any.whl.metadata (3.0 kB)
+Collecting google-api-python-client (from google-generativeai->-r requirements.txt (line 8))
+  Downloading google_api_python_client-2.176.0-py3-none-any.whl.metadata (7.0 kB)
+Collecting google-auth>=2.15.0 (from google-generativeai->-r requirements.txt (line 8))
+  Downloading google_auth-2.40.3-py2.py3-none-any.whl.metadata (6.2 kB)
+Collecting pydantic (from google-generativeai->-r requirements.txt (line 8))
+  Downloading pydantic-2.11.7-py3-none-any.whl.metadata (67 kB)
+Collecting tqdm (from google-generativeai->-r requirements.txt (line 8))
+  Downloading tqdm-4.67.1-py3-none-any.whl.metadata (57 kB)
+Collecting proto-plus<2.0.0dev,>=1.22.3 (from google-ai-generativelanguage==0.6.15->google-generativeai->-r requirements.txt (line 8))
+  Downloading proto_plus-1.26.1-py3-none-any.whl.metadata (2.2 kB)
+Collecting protobuf<7,>=3.20 (from streamlit->-r requirements.txt (line 1))
+  Downloading protobuf-5.29.5-cp38-abi3-manylinux2014_x86_64.whl.metadata (592 bytes)
+Collecting googleapis-common-protos<2.0.0,>=1.56.2 (from google-api-core->google-generativeai->-r requirements.txt (line 8))
+  Downloading googleapis_common_protos-1.70.0-py3-none-any.whl.metadata (9.3 kB)
+Collecting grpcio<2.0.0,>=1.33.2 (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai->-r requirements.txt (line 8))
+  Downloading grpcio-1.73.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.8 kB)
+Collecting grpcio-status<2.0.0,>=1.33.2 (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai->-r requirements.txt (line 8))
+  Downloading grpcio_status-1.73.1-py3-none-any.whl.metadata (1.1 kB)
+Collecting cachetools<7,>=4.0 (from streamlit->-r requirements.txt (line 1))
+  Downloading cachetools-5.5.2-py3-none-any.whl.metadata (5.4 kB)
+Collecting pyasn1-modules>=0.2.1 (from google-auth>=2.15.0->google-generativeai->-r requirements.txt (line 8))
+  Downloading pyasn1_modules-0.4.2-py3-none-any.whl.metadata (3.5 kB)
+Collecting rsa<5,>=3.1.4 (from google-auth>=2.15.0->google-generativeai->-r requirements.txt (line 8))
+  Downloading rsa-4.9.1-py3-none-any.whl.metadata (5.6 kB)
+INFO: pip is looking at multiple versions of grpcio-status to determine which version is compatible with other requirements. This could take a while.
+Collecting grpcio-status<2.0.0,>=1.33.2 (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai->-r requirements.txt (line 8))
+  Downloading grpcio_status-1.73.0-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.72.2-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.72.1-py3-none-any.whl.metadata (1.1 kB)
+  Downloading grpcio_status-1.71.2-py3-none-any.whl.metadata (1.1 kB)
+Collecting pyasn1>=0.1.3 (from rsa<5,>=3.1.4->google-auth>=2.15.0->google-generativeai->-r requirements.txt (line 8))
+  Downloading pyasn1-0.6.1-py3-none-any.whl.metadata (8.4 kB)
+Collecting MarkupSafe>=2.0 (from jinja2->altair<6,>=4.0->streamlit->-r requirements.txt (line 1))
+  Downloading MarkupSafe-3.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.0 kB)
+Collecting attrs>=22.2.0 (from jsonschema>=3.0->altair<6,>=4.0->streamlit->-r requirements.txt (line 1))
+  Downloading attrs-25.3.0-py3-none-any.whl.metadata (10 kB)
+Collecting jsonschema-specifications>=2023.03.6 (from jsonschema>=3.0->altair<6,>=4.0->streamlit->-r requirements.txt (line 1))
+  Downloading jsonschema_specifications-2025.4.1-py3-none-any.whl.metadata (2.9 kB)
+Collecting referencing>=0.28.4 (from jsonschema>=3.0->altair<6,>=4.0->streamlit->-r requirements.txt (line 1))
+  Downloading referencing-0.36.2-py3-none-any.whl.metadata (2.8 kB)
+Collecting rpds-py>=0.7.1 (from jsonschema>=3.0->altair<6,>=4.0->streamlit->-r requirements.txt (line 1))
+  Downloading rpds_py-0.26.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.2 kB)
+Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas->-r requirements.txt (line 3))
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting httplib2<1.0.0,>=0.19.0 (from google-api-python-client->google-generativeai->-r requirements.txt (line 8))
+  Downloading httplib2-0.22.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting google-auth-httplib2<1.0.0,>=0.2.0 (from google-api-python-client->google-generativeai->-r requirements.txt (line 8))
+  Downloading google_auth_httplib2-0.2.0-py2.py3-none-any.whl.metadata (2.2 kB)
+Collecting uritemplate<5,>=3.0.1 (from google-api-python-client->google-generativeai->-r requirements.txt (line 8))
+  Downloading uritemplate-4.2.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting annotated-types>=0.6.0 (from pydantic->google-generativeai->-r requirements.txt (line 8))
+  Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+Collecting pydantic-core==2.33.2 (from pydantic->google-generativeai->-r requirements.txt (line 8))
+  Downloading pydantic_core-2.33.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+Collecting typing-inspection>=0.4.0 (from pydantic->google-generativeai->-r requirements.txt (line 8))
+  Downloading typing_inspection-0.4.1-py3-none-any.whl.metadata (2.6 kB)
+Downloading streamlit-1.47.0-py3-none-any.whl (9.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.9/9.9 MB 147.9 MB/s eta 0:00:00
+Downloading numpy-2.3.1-cp312-cp312-manylinux_2_28_x86_64.whl (16.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.6/16.6 MB 175.7 MB/s eta 0:00:00
+Downloading pandas-2.3.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (12.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 187.5 MB/s eta 0:00:00
+Downloading altair-5.5.0-py3-none-any.whl (731 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 731.2/731.2 kB 39.7 MB/s eta 0:00:00
+Downloading blinker-1.9.0-py3-none-any.whl (8.5 kB)
+Downloading click-8.2.1-py3-none-any.whl (102 kB)
+Downloading GitPython-3.1.44-py3-none-any.whl (207 kB)
+Downloading gitdb-4.0.12-py3-none-any.whl (62 kB)
+Downloading packaging-25.0-py3-none-any.whl (66 kB)
+Downloading pillow-11.3.0-cp312-cp312-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.6/6.6 MB 123.4 MB/s eta 0:00:00
+Downloading pydeck-0.9.1-py2.py3-none-any.whl (6.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.9/6.9 MB 158.0 MB/s eta 0:00:00
+Downloading requests-2.32.4-py3-none-any.whl (64 kB)
+Downloading charset_normalizer-3.4.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (148 kB)
+Downloading idna-3.10-py3-none-any.whl (70 kB)
+Downloading smmap-5.0.2-py3-none-any.whl (24 kB)
+Downloading tenacity-9.1.2-py3-none-any.whl (28 kB)
+Downloading toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Downloading tornado-6.5.1-cp39-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (443 kB)
+Downloading typing_extensions-4.14.1-py3-none-any.whl (43 kB)
+Downloading urllib3-2.5.0-py3-none-any.whl (129 kB)
+Downloading watchdog-6.0.0-py3-none-manylinux2014_x86_64.whl (79 kB)
+Downloading matplotlib-3.10.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (8.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 8.6/8.6 MB 120.1 MB/s eta 0:00:00
+Downloading seaborn-0.13.2-py3-none-any.whl (294 kB)
+Downloading scikit_learn-1.7.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (9.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.5/9.5 MB 126.3 MB/s eta 0:00:00
+Downloading google_generativeai-0.8.5-py3-none-any.whl (155 kB)
+Downloading google_ai_generativelanguage-0.6.15-py3-none-any.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 45.8 MB/s eta 0:00:00
+Downloading google_api_core-2.25.1-py3-none-any.whl (160 kB)
+Downloading google_auth-2.40.3-py2.py3-none-any.whl (216 kB)
+Downloading cachetools-5.5.2-py3-none-any.whl (10 kB)
+Downloading googleapis_common_protos-1.70.0-py3-none-any.whl (294 kB)
+Downloading grpcio-1.73.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (6.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.0/6.0 MB 137.8 MB/s eta 0:00:00
+Downloading grpcio_status-1.71.2-py3-none-any.whl (14 kB)
+Downloading proto_plus-1.26.1-py3-none-any.whl (50 kB)
+Downloading protobuf-5.29.5-cp38-abi3-manylinux2014_x86_64.whl (319 kB)
+Downloading rsa-4.9.1-py3-none-any.whl (34 kB)
+Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+Downloading certifi-2025.7.14-py3-none-any.whl (162 kB)
+Downloading contourpy-1.3.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (323 kB)
+Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.59.0-cp312-cp312-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl (4.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.9/4.9 MB 144.9 MB/s eta 0:00:00
+Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+Downloading joblib-1.5.1-py3-none-any.whl (307 kB)
+Downloading jsonschema-4.25.0-py3-none-any.whl (89 kB)
+Downloading attrs-25.3.0-py3-none-any.whl (63 kB)
+Downloading jsonschema_specifications-2025.4.1-py3-none-any.whl (18 kB)
+Downloading kiwisolver-1.4.8-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (1.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 65.5 MB/s eta 0:00:00
+Downloading MarkupSafe-3.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (23 kB)
+Downloading narwhals-1.48.0-py3-none-any.whl (376 kB)
+Downloading pyarrow-21.0.0-cp312-cp312-manylinux_2_28_x86_64.whl (42.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 42.8/42.8 MB 133.5 MB/s eta 0:00:00
+Downloading pyasn1-0.6.1-py3-none-any.whl (83 kB)
+Downloading pyasn1_modules-0.4.2-py3-none-any.whl (181 kB)
+Downloading pyparsing-3.2.3-py3-none-any.whl (111 kB)
+Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+Downloading referencing-0.36.2-py3-none-any.whl (26 kB)
+Downloading rpds_py-0.26.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (386 kB)
+Downloading scipy-1.16.0-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (35.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.1/35.1 MB 110.3 MB/s eta 0:00:00
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading threadpoolctl-3.6.0-py3-none-any.whl (18 kB)
+Downloading tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+Downloading google_api_python_client-2.176.0-py3-none-any.whl (13.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.7/13.7 MB 14.2 MB/s eta 0:00:00
+Downloading google_auth_httplib2-0.2.0-py2.py3-none-any.whl (9.3 kB)
+Downloading httplib2-0.22.0-py3-none-any.whl (96 kB)
+Downloading uritemplate-4.2.0-py3-none-any.whl (11 kB)
+Downloading pydantic-2.11.7-py3-none-any.whl (444 kB)
+Downloading pydantic_core-2.33.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 101.9 MB/s eta 0:00:00
+Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+Downloading typing_inspection-0.4.1-py3-none-any.whl (14 kB)
+Downloading tqdm-4.67.1-py3-none-any.whl (78 kB)
+Building wheels for collected packages: fpdf
+  Building wheel for fpdf (pyproject.toml): started
+  Building wheel for fpdf (pyproject.toml): finished with status 'done'
+  Created wheel for fpdf: filename=fpdf-1.7.2-py2.py3-none-any.whl size=40758 sha256=bf8314fa6c1280de56fb6246e10dab6a18623213a842108727e1e916de93a8c0
+  Stored in directory: /root/.cache/pip/wheels/6e/62/11/dc73d78e40a218ad52e7451f30166e94491be013a7850b5d75
+Successfully built fpdf
+Installing collected packages: pytz, fpdf, watchdog, urllib3, uritemplate, tzdata, typing-extensions, tqdm, tornado, toml, threadpoolctl, tenacity, smmap, six, rpds-py, python-dotenv, pyparsing, pyasn1, pyarrow, protobuf, pillow, packaging, numpy, narwhals, MarkupSafe, kiwisolver, joblib, idna, grpcio, fonttools, cycler, click, charset_normalizer, certifi, cachetools, blinker, attrs, annotated-types, typing-inspection, scipy, rsa, requests, referencing, python-dateutil, pydantic-core, pyasn1-modules, proto-plus, jinja2, httplib2, googleapis-common-protos, gitdb, contourpy, scikit-learn, pydeck, pydantic, pandas, matplotlib, jsonschema-specifications, grpcio-status, google-auth, gitpython, seaborn, jsonschema, google-auth-httplib2, google-api-core, google-api-python-client, altair, streamlit, google-ai-generativelanguage, google-generativeai
+
+Successfully installed MarkupSafe-3.0.2 altair-5.5.0 annotated-types-0.7.0 attrs-25.3.0 blinker-1.9.0 cachetools-5.5.2 certifi-2025.7.14 charset_normalizer-3.4.2 click-8.2.1 contourpy-1.3.2 cycler-0.12.1 fonttools-4.59.0 fpdf-1.7.2 gitdb-4.0.12 gitpython-3.1.44 google-ai-generativelanguage-0.6.15 google-api-core-2.25.1 google-api-python-client-2.176.0 google-auth-2.40.3 google-auth-httplib2-0.2.0 google-generativeai-0.8.5 googleapis-common-protos-1.70.0 grpcio-1.73.1 grpcio-status-1.71.2 httplib2-0.22.0 idna-3.10 jinja2-3.1.6 joblib-1.5.1 jsonschema-4.25.0 jsonschema-specifications-2025.4.1 kiwisolver-1.4.8 matplotlib-3.10.3 narwhals-1.48.0 numpy-2.3.1 packaging-25.0 pandas-2.3.1 pillow-11.3.0 proto-plus-1.26.1 protobuf-5.29.5 pyarrow-21.0.0 pyasn1-0.6.1 pyasn1-modules-0.4.2 pydantic-2.11.7 pydantic-core-2.33.2 pydeck-0.9.1 pyparsing-3.2.3 python-dateutil-2.9.0.post0 python-dotenv-1.1.1 pytz-2025.2 referencing-0.36.2 requests-2.32.4 rpds-py-0.26.0 rsa-4.9.1 scikit-learn-1.7.1 scipy-1.16.0 seaborn-0.13.2 six-1.17.0 smmap-5.0.2 streamlit-1.47.0 tenacity-9.1.2 threadpoolctl-3.6.0 toml-0.10.2 tornado-6.5.1 tqdm-4.67.1 typing-extensions-4.14.1 typing-inspection-0.4.1 tzdata-2025.2 uritemplate-4.2.0 urllib3-2.5.0 watchdog-6.0.0
+[91mWARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+[0m ---> Removed intermediate container 1112f597eba9
+ ---> 7f70b56bbd32
+Step 5/6 : EXPOSE 8501
+ ---> Running in f99e8035ee14
+ ---> Removed intermediate container f99e8035ee14
+ ---> f7f8b907d114
+Step 6/6 : CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.enableCORS=false"]
+ ---> Running in bbf4dcaf920f
+ ---> Removed intermediate container bbf4dcaf920f
+ ---> 9481f1746e61
+Successfully built 9481f1746e61
+Successfully tagged amanoj3452/genai-projects:diabetes-app
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push to Docker Hub)
+[Pipeline] withCredentials
+Masking supported pattern matches of $DOCKER_PASS
+[Pipeline] {
+[Pipeline] sh
++ echo ****
++ docker login -u amanoj3452 --password-stdin
+WARNING! Your password will be stored unencrypted in /var/lib/jenkins/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credential-stores
+
+Login Succeeded
++ docker push amanoj3452/genai-projects:diabetes-app
+The push refers to repository [docker.io/amanoj3452/genai-projects]
+22f7a140f503: Preparing
+5e260e9d9616: Preparing
+1648b25d9279: Preparing
+d3f091e2c839: Preparing
+cffce96e7bff: Preparing
+01593c324525: Preparing
+7cc7fe68eff6: Preparing
+7cc7fe68eff6: Waiting
+01593c324525: Waiting
+1648b25d9279: Layer already exists
+cffce96e7bff: Layer already exists
+d3f091e2c839: Layer already exists
+01593c324525: Layer already exists
+7cc7fe68eff6: Layer already exists
+5e260e9d9616: Pushed
+22f7a140f503: Pushed
+diabetes-app: digest: sha256:c39b2751f04c964740c8b25fe2f6e5e481156b13df149193843127539c9afeeb size: 1789
++ docker logout
+Removing login credentials for https://index.docker.io/v1/
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Update K8s Manifest)
+[Pipeline] sh
++ sed -i s|image:.*|image: amanoj3452/genai-projects:diabetes-app| k8s-manifests/deployment.yaml
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to Minikube)
+[Pipeline] sh
++ kubectl apply -f k8s-manifests/deployment.yaml
+deployment.apps/diabetes-app unchanged
+service/diabetes-service unchanged
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Access App)
+[Pipeline] sh
++ echo Waiting for deployment to be available...
+Waiting for deployment to be available...
++ kubectl rollout status deployment/diabetes-app --timeout=45s
+deployment "diabetes-app" successfully rolled out
++ echo Fetching service URL...
+Fetching service URL...
++ minikube service diabetes-service --url
+http://192.168.49.2:30031
++ echo Forwarding port...
+Forwarding port...
++ nohup kubectl port-forward --address 0.0.0.0 service/diabetes-service 30031:8501
+Forwarding from 0.0.0.0:30031 -> 8501
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Verify Deployment)
+[Pipeline] sh
++ kubectl get pods -o wide
+NAME                                         READY   STATUS    RESTARTS      AGE     IP            NODE       NOMINATED NODE   READINESS GATES
+diabetes-app-98955965b-8bds8                 1/1     Running   0             7m40s   10.244.0.32   minikube   <none>           <none>
+jpetstore-deployment-f499c48fb-bmjlw         1/1     Running   5 (89m ago)   2d8h    10.244.0.24   minikube   <none>           <none>
+jpetstore-jpetstore-chart-5bf54c7cf7-ckcw5   1/1     Running   2 (89m ago)   7h18m   10.244.0.25   minikube   <none>           <none>
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS
