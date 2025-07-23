@@ -6,7 +6,7 @@ This documentation covers manual and automated deployment of a Diabetes Predicti
 
 ## 📦 Application Overview
 
-This app is a **Machine Learning model** that predicts whether a patient is likely to have diabetes based on inputs. It exposes an API using **Streamlit** for implementation.
+This application is a **Machine Learning model** that predicts whether a patient is likely to have diabetes based on user input features. It uses **Scikit-learn's `DecisionTreeClassifier`** for the model and provides an interactive user interface using **Streamlit**.
 
 This is a Streamlit-based web application with the following core features:
 
