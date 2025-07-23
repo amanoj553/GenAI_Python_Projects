@@ -149,7 +149,8 @@ So every user query gets **sent to Gemini-Pro**, and the **AI-generated response
   - This key is free for limited usage (read the usage limits in Gemini API pricing).
   - The key allows you to access models like gemini-pro and gemini-pro-vision.
 ```
-## ✅ Test the Key (Optional)
+
+### ✅ Test the Key (Optional)
 ```bash
   curl -H "Content-Type: application/json" \
      -H "Authorization: Bearer $GEMINI_API_KEY" \
@@ -157,7 +158,7 @@ So every user query gets **sent to Gemini-Pro**, and the **AI-generated response
      https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent
 ```
 
-## Dockerfile
+### Dockerfile
 
 ```bash
     # Use official Python 3.12 base image
@@ -178,7 +179,31 @@ EXPOSE 8501
 # Run the Streamlit app
 CMD ["streamlit", "run", "main.py", "--server.port=8501", "--server.enableCORS=false"]
 ```
-## 🧪 3. Jenkins Pipeline Deployment on Minikube
+
+## 🔧 1. Manual Deployment using Docker
+
+### ✅ Steps:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-repo/diabetes-app.git
+   cd diabetes-app
+   ```
+2. Create the Docker image:
+    ```bash
+    docker build -t diabetes-app:latest .
+    ```
+3. Run the container:
+   ```bash
+   docker run -d -p 8501:8501 -e GEMINI_API_KEY=$GEMINI_API_KEY diabetes-app:latest
+   ```
+4. Access the application:
+   ```bash
+   Browser: http://<EC2_PUBLIC_IP>:8501
+   ```
+
+## 🧪2. Jenkins Pipeline Deployment on Minikube
+
 ```bash
 pipeline {
     agent any
@@ -261,38 +286,12 @@ pipeline {
 
 ```
 
-## 🔧 1. Manual Deployment using Docker
+### Jenkins Build and Deployment Log – Successful diabetes-app Deployment to minikube cluster:
 
-### ✅ Steps:
-
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-repo/diabetes-app.git
-   cd diabetes-app
-   ```
-2. Create the Docker image:
-    ```bash
-    docker build -t diabetes-app:latest .
-    ```
-3. Run the container:
-   ```bash
-   docker run -d -p 8501:8501 -e GEMINI_API_KEY=$GEMINI_API_KEY diabetes-app:latest
-   ```
-4. Access the application:
-   ```bash
-   Browser: http://<EC2_PUBLIC_IP>:8501
-   ```
-
-
-
- ## Jenkins Build Logs:
-
-### Jenkins Build and Deployment Log – Successful WAR Deployment to minikube cluster:
-
-[View Log File for Docker Container Deployment](Build_log_GenAI_DemoProject.txt)
+[View Log File for Minikube Deployment](Build_log_GenAI_DemoProject.txt)
   
-### Build Success Screenshots – WAR Deployment to Tomcat
 
+### Build Success Screenshots – diabetes-app Deployment to minikube:
 
 ![Build success status](diabetes-app_minikube.JPG)
 
@@ -356,7 +355,7 @@ Now visit: http://<Public-IP>:30031 in your browser
 
   - Ensure:
     - You use --address 0.0.0.0
-    - Security group of EC2 allows port 30031 (for minikube), 8501 (for normal deocker deployment)
+    - Security group of EC2 allows port 30031 (for minikube), 8501 (for normal docker deployment)
 
 ---
 
