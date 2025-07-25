@@ -20,7 +20,7 @@ DHCP or Diabetes Health Care Programme is an integrated healthcare application f
 - Knowledge Center (Upcoming)
 - Suggestion Box (Upcoming)
 
-====================================================================================================
+============================================================================================
 
 # 🩺 Diabetes Prediction App Deployment
 
